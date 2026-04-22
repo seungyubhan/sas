@@ -9,7 +9,7 @@ framework for **test-time adaptation in offline safe RL without retraining**.
 > *Accepted at AISTATS 2026*
 
 <p align="center">
-  <img src="imgs/fig1_3.png" width="70%">
+  <img src="imgs/figure1.png" width="90%">
 </p>
 
 ## Overview
