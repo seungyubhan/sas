@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="SAS: Lyapunov-Guided Self-Alignment for Test-Time Adaptation in Offline Safe Reinforcement Learning (AISTATS 2026).">
+  <meta name="keywords"
+        content="Safe Reinforcement Learning, Offline RL, Lyapunov Stability, Decision Transformer, Test-Time Adaptation, Self-Alignment, In-Context Learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAS: Lyapunov-Guided Self-Alignment for Offline Safe RL</title>
+
+  <!-- Open Graph / social cards -->
+  <meta property="og:title" content="SAS: Lyapunov-Guided Self-Alignment for Offline Safe RL">
+  <meta property="og:description"
+        content="A transformer-based framework that enables test-time adaptation in offline safe RL without retraining. AISTATS 2026.">
+  <meta property="og:image" content="https://seungyubhan.github.io/sas/static/images/figure1.png">
+  <meta property="og:url" content="https://seungyubhan.github.io/sas/">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SAS: Lyapunov-Guided Self-Alignment for Offline Safe RL">
+  <meta name="twitter:description"
+        content="Test-time safe alignment for offline RL via Lyapunov-guided imagined prompts. AISTATS 2026.">
+  <meta name="twitter:image" content="https://seungyubhan.github.io/sas/static/images/figure1.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">
+            Lyapunov-Guided Self-Alignment:<br>
+            Test-Time Adaptation for Offline Safe Reinforcement Learning
+          </h1>
+          <div class="is-size-4 publication-authors" style="margin-bottom: 0.5rem;">
+            <b>AISTATS 2026</b>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Seungyub Han<sup>1,*</sup>,</span>
+            <span class="author-block">
+              Hyungjin Kim<sup>1,*</sup>,</span>
+            <span class="author-block">
+              Jungwoo Lee<sup>1</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Seoul National University</span>
+            <br>
+            <span class="author-block"><sup>*</sup>Equal contribution</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF / OpenReview -->
+              <span class="link-block">
+                <a href="https://openreview.net/forum?id=GPNwYOQECX"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- arXiv (dummy) -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video (dummy) -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code -->
+              <span class="link-block">
+                <a href="https://github.com/seungyubhan/sas"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/figure1.png"
+           alt="SAS overview: from a fixed initial state, the transformer imagines rollouts, flags risky (s,a) with the Lyapunov condition, and extracts a safe segment as a prompt for the real test-time trajectory."
+           style="width: 100%;">
+      <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
+        <b>SAS</b> recycles Lyapunov-safe imagined trajectories as in-context prompts,
+        aligning a pretrained offline RL agent with safety constraints <i>without any retraining</i>.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Offline reinforcement learning (RL) agents often fail when deployed, as the gap between
+            training datasets and real environments leads to unsafe behavior. To address this, we
+            present <b>SAS (Self-Alignment for Safety)</b>, a transformer-based framework that
+            enables <i>test-time adaptation</i> in offline safe RL without retraining. In SAS, the
+            main mechanism is self-alignment: at test time, the pretrained agent generates several
+            imagined trajectories and selects those satisfying the Lyapunov condition. These
+            feasible segments are then recycled as in-context prompts, allowing the agent to
+            realign its behavior toward safety while avoiding parameter updates.
+          </p>
+          <p>
+            In effect, SAS turns Lyapunov-guided imagination into control-invariant prompts, and
+            its transformer architecture admits a hierarchical RL interpretation where prompting
+            functions as Bayesian inference over latent skills. Across Safety Gymnasium and MuJoCo
+            benchmarks, SAS consistently reduces cost and failure while maintaining or improving
+            return.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <!-- TODO: replace with final YouTube embed URL. See README_PLACEHOLDERS.md -->
+          <iframe src="about:blank"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <p class="is-size-6 has-text-grey" style="margin-top: 0.5rem;">
+          Video coming soon.
+        </p>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Method</h2>
+        <div class="content has-text-justified">
+          <p>
+            SAS interprets transformer-based RL as a hierarchical policy, where prompting amounts to
+            Bayesian inference over latent high-level skills. We reformulate the Lyapunov stability
+            condition through occupancy measures estimated from offline data, and cast
+            safety verification as maximizing the log-likelihood of two binary observables
+            <i>U<sub>t</sub></i> and <i>V<sub>t</sub></i>.
+          </p>
+        </div>
+        <div class="has-text-centered">
+          <img src="./static/images/pgm_sas.png"
+               alt="Hierarchical RL as probabilistic inference."
+               style="max-width: 60%;">
+          <p class="is-size-6 has-text-grey">
+            Hierarchical RL as probabilistic inference: latent skills <i>z<sub>t</sub></i>, the
+            optimality variable <i>O<sub>t</sub></i>, and observables encoding safety conditions.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered" style="margin-top: 2rem;">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Results</h2>
+        <div class="has-text-centered">
+          <img src="./static/images/fig3_2.png"
+               alt="SAS trajectories overlaid on the Lyapunov landscape."
+               style="width: 100%;">
+          <p class="is-size-6 has-text-grey">
+            SAS dodges hazards by steering trajectories toward the control-invariant set
+            <i>R<sup>SAS</sup><sub>G</sub></i> (blue regions).
+          </p>
+        </div>
+        <div class="content has-text-justified" style="margin-top: 1rem;">
+          <p>
+            Across Safety Gymnasium, MuJoCo, and Bullet-Safety-Gym benchmarks, applying
+            <b>+SAS</b> on top of a Decision Transformer (DT) or Constrained Decision Transformer
+            (CDT) backbone <i>reduces cost and failure by up to 2×</i> while maintaining or
+            improving return &mdash; all without any additional training.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{
+  han2026lyapunovguided,
+  title={Lyapunov-Guided Self-Alignment: Test-Time Adaptation for Offline Safe Reinforcement Learning},
+  author={Seungyub Han and Hyung Jjn Kim and Jungwoo Lee},
+  booktitle={The 29th International Conference on Artificial Intelligence and Statistics},
+  year={2026},
+  url={https://openreview.net/forum?id=GPNwYOQECX}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://openreview.net/forum?id=GPNwYOQECX">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/seungyubhan/sas" class="external-link">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This website borrows its layout from the <a
+              href="https://github.com/nerfies/nerfies.github.io">Nerfies project page</a>.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
