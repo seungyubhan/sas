@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+.Python
+build/
+dist/
+.eggs/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Editors / IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Experiment artifacts
+save/
+wandb/
+runs/
+*.pt
+*.pth
+*.ckpt
+*.log
+
+# Datasets
+data/*.pkl
+data/*.hdf5
+data/*.h5
+
+# Local notes / paper drafts
+*.pdf
+*.txt
+!requirements*.txt

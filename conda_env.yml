@@ -1,0 +1,19 @@
+name: self-aligning-dt
+channels:
+- pytorch
+dependencies:
+- python=3.8.5
+- anaconda
+- cudatoolkit=10.
+- numpy
+- pip
+- pip:
+  - gym>=0.26.0
+  - mujoco-py==2.0.2.13
+  - numpy>=1.21.0
+  - torch==1.8.1
+  - transformers==4.5.1
+  - wandb==0.9.1
+  - safety-gymnasium==0.4.0
+  - dsrl==0.1.0
+  - packaging==21.3
